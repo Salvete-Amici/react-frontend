@@ -16,7 +16,6 @@
     "@mui/material": "^7.0.2",
     "@reduxjs/toolkit": "^2.7.0",
     "@tailwindcss/cli": "^4.1.4",
-    "@tailwindcss/postcss": "^4.1.4",
     "axios": "^1.9.0",
     "fs-web": "^1.0.1",
     "path-browserify": "^1.0.1",
@@ -28,11 +27,13 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.5.3",
     "source-map": "^0.7.4",
+    "swiper": "^11.2.6",
     "tailwindcss": "^4.1.4",
     "url-polyfill": "^1.1.13"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
+    "@tailwindcss/postcss": "^4.1.6",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",

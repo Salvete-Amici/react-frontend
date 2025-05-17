@@ -11,7 +11,8 @@ const ProductCard = ({
   quantity,
   price,
   discount,
-  specialPrice
+  specialPrice,
+  about=false,
 }) => {
   const [openProductViewModal, setOpenProductViewModal] = useState(false);
   const btnLoader = false;
@@ -19,8 +20,10 @@ const ProductCard = ({
   const isAvailable = quantity && Number(quantity) > 0;
 
   const handleProductView = (product) => {
-    setSelectedViewProduct(product);
-    setOpenProductViewModal(true);
+    if (!about) {
+      setSelectedViewProduct(product);
+      setOpenProductViewModal(true);
+    }
   };
 
   return (
@@ -36,7 +39,7 @@ const ProductCard = ({
           discount,
           specialPrice
         })
-      }} className="w-full overflow-hidden aspect-[4/3]">
+      }} className="w-full overflow-hidden aspect-[3/2]">
         <img className="w-full h-full cursor-pointer transition-transform duration-300 transform hover:scale-105"
         src={image}
         alt={productName}>
@@ -63,7 +66,8 @@ const ProductCard = ({
             {truncateText(description, 80)}
           </p>
         </div>
-        <div className="flex items-center justify-between">
+        {!about && (
+          <div className="flex items-center justify-between">
           {specialPrice ? (
             <div className="flex flex-col">
               <span className="text-gray-400 line-through">
@@ -87,6 +91,7 @@ const ProductCard = ({
             {isAvailable ? "Add to Cart" : "Out of Stock"}
           </button>
         </div>
+        )} 
       </div>
       <ProductViewModal 
         open={openProductViewModal}
