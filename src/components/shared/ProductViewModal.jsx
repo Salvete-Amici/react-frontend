@@ -13,13 +13,13 @@ function ProductViewModal({open, setOpen, product, isAvailable}) {
 
   return (
     <>
-      <Dialog open={open} as="div" className="relative z-10" onClose={() => setOpen(false)} __demoMode>
+      <Dialog open={open} as="div" className="relative z-60" onClose={() => setOpen(false)} __demoMode>
       <DialogBackdrop className="fixed inset-0 bg-amber-500/30 transition-opacity" />
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4">
             <DialogPanel
               transition
-              className="relative transform overflow-hidden rounded-lg bg-white shadow-all transition-all w-full max-w-2xl"
+              className="relative z-60 transform overflow-hidden rounded-lg bg-white shadow-all transition-all w-full max-w-2xl"
             >
               {image && (
               <div className="flex justify-center  w-full">

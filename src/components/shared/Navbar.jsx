@@ -5,11 +5,13 @@ import { Link, useLocation } from "react-router-dom";
 import { RxCross2 } from "react-icons/rx";
 import { IoIosMenu } from "react-icons/io";
 import { useSelector } from "react-redux";
+import UserMenu from "../UserMenu";
 
 const Navbar = () => {
   const path = useLocation().pathname;
   const [navbarOpen, setNavbarOpen] = useState(false);
   const {cart} = useSelector((state) => state.carts);
+  const {user} = useSelector((state) => state.auth);
 
   return (
     <div className="h-[70px] bg-amber-500 text-white z-50 flex items-center sticky top-0">
@@ -63,6 +65,12 @@ const Navbar = () => {
               </Badge>
             </Link>
           </li>
+
+          {user && user.id ? (
+            <li className="font-[500] transition-all duration-150">
+              <UserMenu />
+            </li>
+          ) : (     
           <li className="font-[500] transition-all duration-150">
             <Link className="flex items-center space-x-2 px-4 py-[5px]
             bg-amber-200
@@ -73,6 +81,7 @@ const Navbar = () => {
               <span>Login</span>
             </Link>
           </li>
+          )} 
         </ul>
         <button 
           onClick={() => setNavbarOpen(!navbarOpen)}
