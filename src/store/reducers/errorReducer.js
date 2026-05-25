@@ -1,8 +1,9 @@
 const initialState = {
   isLoading: false,
-  errorMessage:null,
+  errorMessage: null,
   categoryLoader: false,
   categoryError: null,
+  btnLoader: false,
 };
 
 export const errorReducer = (state = initialState, action) => {
@@ -10,39 +11,51 @@ export const errorReducer = (state = initialState, action) => {
     case "IS_FETCHING":
       return {
         ...state,
-        isLoading:true,
-        errorMessage:null,
+        isLoading: true,
+        errorMessage: null,
+      };
+    case "BUTTON_LOADER":
+      return {
+        ...state,
+        btnLoader: true,
+        errorMessage: null,
+        categoryError: null,
       };
     case "IS_SUCCESS":
       return {
         ...state,
-        isLoading:false,
-        errorMessage:null,
+        isLoading: false,
+        errorMessage: null,
+        btnLoader: false,
+        categoryError: null,
+        categoryLoader: false,
       };
     case "IS_ERROR":
       return {
         ...state,
-        isLoading:false,
-        errorMessage:action.payload, // we know from index.js that action has payload, which has the error message 
+        isLoading: false,
+        errorMessage: action.payload, // we know from index.js that action has payload, which has the error message
+        btnLoader: false,
+        categoryLoader: false,
       };
-      case "CATEGORY_LOADER":
-        return {
-          ...state,
-          categoryLoader:true,
-          categoryError:null,
-        };
-      case "FETCH_CATEGORIES":
-        return {
-          ...state,
-          categoryLoader:false,
-          categoryError: null,
-        };
-      case "CATEGORY_ERROR":
-        return {
-          ...state,
-          categoryLoader: false,
-          categoryError: action.payload,
-  }
+    case "CATEGORY_LOADER":
+      return {
+        ...state,
+        categoryLoader: true,
+        categoryError: null,
+      };
+    case "FETCH_CATEGORIES":
+      return {
+        ...state,
+        categoryLoader: false,
+        categoryError: null,
+      };
+    case "CATEGORY_ERROR":
+      return {
+        ...state,
+        categoryLoader: false,
+        categoryError: action.payload,
+      };
     default:
       return state;
   }
