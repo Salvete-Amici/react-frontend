@@ -1,14 +1,14 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, EffectFade, Navigation } from 'swiper/modules';
+import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import 'swiper/css/scrollbar';
-import 'swiper/css/effect-fade';
+import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 
-import { bannerList } from '../../utils';
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { bannerList } from "../../utils";
 
 const colors = ["bg-banner-color1", "bg-banner-color2", "bg-banner-color3"];
 
@@ -26,7 +26,9 @@ const HeroBanner = () => {
       >
         {bannerList.map((item, i) => (
           <SwiperSlide key={item.id}>
-            <div className={`carousel-item rounded-md sm:h-[500px] h-96 bg-amber-300`}>
+            <div
+              className={`carousel-item rounded-md sm:h-[500px] h-96 bg-amber-300`}
+            >
               <div className="flex items-center justify-center">
                 <div className="hidden lg:flex justify-center w-1/2 p-8">
                   <div className="text-center">
@@ -43,7 +45,7 @@ const HeroBanner = () => {
                       className="mt-6 inline-block bg-black text-white py-2 px-4 rounded hover:bg-gray-800"
                       to="/products"
                     >
-                      Shop
+                      Browse Books
                     </Link>
                   </div>
                 </div>

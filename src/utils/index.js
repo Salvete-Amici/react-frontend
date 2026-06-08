@@ -2,22 +2,24 @@ export const bannerList = [
   {
     id: 1,
     image: "https://placehold.co/600x400",
-    title: "Home Comfort",
-    subtitle: "Living Room",
-    description: "Upgrade your space with cozy and stylish sofas",
+    title: "Collectible Editions",
+    subtitle: "Books With a Past",
+    description:
+      "Discover signed copies, first editions, and uncommon printings.",
   },
   {
     id: 2,
     image: "https://placehold.co/600x400",
-    title: "Entertainment Hub",
-    subtitle: "Smart TV",
-    description: "Experience the latest in home entertainment",
+    title: "Vintage Literature",
+    subtitle: "Stories Worth Preserving",
+    description:
+      "Browse carefully described books from independent collections.",
   },
   {
     id: 3,
     image: "https://placehold.co/600x400",
-    title: "Playful Picks",
-    subtitle: "Kids' Clothing",
-    description: "Bright and fun styles for kids, up to 20% off",
-}
-]
+    title: "Rare Book Drop",
+    subtitle: "Limited Listings",
+    description: "Explore distinctive books available in limited quantities.",
+  },
+];
