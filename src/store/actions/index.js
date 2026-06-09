@@ -17,7 +17,7 @@ export const fetchProducts = (queryString) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "IS_ERROR",
-      payload: error?.response?.data?.message || "Failed fetching products", // optional chaining
+      payload: error?.response?.data?.message || "Unable to load book listings", // optional chaining
     });
   }
 };

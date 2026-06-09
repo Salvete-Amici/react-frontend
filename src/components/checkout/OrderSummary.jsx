@@ -76,7 +76,7 @@ const OrderSummary = ({ totalPrice, cart, address, paymentMethod }) => {
 
             <div className="space-y-2">
               <div className="flex justify-between">
-                <span>Products</span>
+                <span>Items</span>
                 <span>${formatPriceCalculation(totalPrice, 1)}</span>
               </div>
               <div className="flex justify-between">
