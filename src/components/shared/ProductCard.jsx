@@ -1,7 +1,8 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { FaShoppingCart } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { addToCart } from "../../store/actions";
 import truncateText from "../../utils/truncateText";
 import ProductViewModal from "./ProductViewModal";
@@ -30,6 +31,10 @@ const ProductCard = ({
   const [selectedViewProduct, setSelectedViewProduct] = useState({});
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.auth);
+
   const btnLoader = false;
 
   const isAvailable = Number(quantity) > 0;
@@ -67,6 +72,12 @@ const ProductCard = ({
   };
 
   const addToCartHandler = (cartItems) => {
+    if (!user?.id) {
+      toast.error("Please log in to add books to your cart.");
+      navigate("/login");
+      return;
+    }
+
     dispatch(addToCart(cartItems, 1, toast));
   };
 
@@ -144,12 +155,14 @@ const ProductCard = ({
                   quantity,
                 })
               }
-              className={`bg-blue-500 ${
-                isAvailable ? "opacity-100 hover:bg-blue-600" : "opacity-70"
-              } text-white py-2 px-3 rounded-lg transition-colors duration-300 w-36 flex items-center justify-center`}
+              className={`${
+                isAvailable
+                  ? "bg-blue-500 hover:bg-blue-600"
+                  : "bg-blue-400 cursor-not-allowed"
+              } text-white h-10 px-4 rounded-lg transition-colors duration-300 min-w-[11rem] flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium`}
             >
-              <FaShoppingCart className="mr-2" />
-              {isAvailable ? "Add to Cart" : "Sold Out"}
+              <FaShoppingCart />
+              {isAvailable ? "Add to Cart" : "Currently unavailable"}
             </button>
           </div>
         )}

@@ -16,22 +16,23 @@ export const cartReducer = (state = initialState, action) => {
         const updatedCart = state.cart.map((item) => {
           if (item.productId === productToAdd.productId) {
             return productToAdd;
-          } else {
-            return item;
           }
+
+          return item;
         });
+
         return {
           ...state,
           cart: updatedCart,
         };
-      } else {
-        const newCart = [...state.cart, productToAdd];
-        return {
-          ...state,
-          cart: newCart,
-        };
       }
+
+      return {
+        ...state,
+        cart: [...state.cart, productToAdd],
+      };
     }
+
     case "REMOVE_FROM_CART":
       return {
         ...state,
@@ -39,6 +40,7 @@ export const cartReducer = (state = initialState, action) => {
           (item) => item.productId !== action.payload.productId,
         ),
       };
+
     case "GET_USER_CART_PRODUCTS":
       return {
         ...state,
@@ -46,6 +48,15 @@ export const cartReducer = (state = initialState, action) => {
         totalPrice: action.totalPrice,
         cartId: action.cartId,
       };
+
+    case "CLEAR_CART":
+      return {
+        ...state,
+        cart: [],
+        totalPrice: 0,
+        cartId: null,
+      };
+
     default:
       return state;
   }

@@ -12,6 +12,8 @@ import Home from "./components/home/Home";
 import PrivateRoute from "./components/PrivateRoute";
 import Products from "./components/products/Products";
 import Navbar from "./components/shared/Navbar";
+import Orders from "./components/user/Orders";
+import Profile from "./components/user/Profile";
 
 function App() {
   return (
@@ -24,9 +26,13 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
+
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/orders" element={<Orders />} />
           </Route>
+
           <Route path="/" element={<PrivateRoute publicPage />}>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

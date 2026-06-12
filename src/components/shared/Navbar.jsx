@@ -1,17 +1,29 @@
 import { Badge } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaShoppingCart, FaSignInAlt, FaStore } from "react-icons/fa";
 import { IoIosMenu } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import { getUserCart } from "../../store/actions";
 import UserMenu from "../UserMenu";
 
 const Navbar = () => {
   const path = useLocation().pathname;
   const [navbarOpen, setNavbarOpen] = useState(false);
+
+  const dispatch = useDispatch();
+
   const { cart } = useSelector((state) => state.carts);
   const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (user?.id) {
+      dispatch(getUserCart());
+    }
+  }, [dispatch, user?.id]);
+
+  const cartCount = user?.id ? cart?.length || 0 : 0;
 
   return (
     <div className="h-[70px] bg-amber-500 text-white z-50 flex items-center sticky top-0">
@@ -22,10 +34,11 @@ const Navbar = () => {
             Sapientia - Vintage & Collectible Books
           </span>
         </Link>
+
         <ul
-          className={`flex sm:gap-10 gap-4 sm:items-center  text-slate-800 sm:static absolute left-0 top-[70px] sm:shadow-none shadow-md ${
+          className={`flex sm:gap-10 gap-4 sm:items-center text-slate-800 sm:static absolute left-0 top-[70px] sm:shadow-none shadow-md ${
             navbarOpen ? "h-fit sm:pb-0 pb-5" : "h-0 overflow-hidden"
-          }  transition-all duration-100 sm:h-fit sm:bg-none bg-amber-500 text-white sm:w-fit w-full sm:flex-row flex-col px-4 sm:px-0`}
+          } transition-all duration-100 sm:h-fit sm:bg-none bg-amber-500 text-white sm:w-fit w-full sm:flex-row flex-col px-4 sm:px-0`}
         >
           <li className="font-[500] transition-all duration-150">
             <Link
@@ -37,6 +50,7 @@ const Navbar = () => {
               Home
             </Link>
           </li>
+
           <li className="font-[500] transition-all duration-150">
             <Link
               className={`${
@@ -49,6 +63,7 @@ const Navbar = () => {
               Browse Books
             </Link>
           </li>
+
           <li className="font-[500] transition-all duration-150">
             <Link
               className={`${
@@ -59,6 +74,7 @@ const Navbar = () => {
               About
             </Link>
           </li>
+
           <li className="font-[500] transition-all duration-150">
             <Link
               className={`${
@@ -71,16 +87,17 @@ const Navbar = () => {
               Contact
             </Link>
           </li>
+
           <li className="font-[500] transition-all duration-150">
             <Link
               className={`${
                 path === "/cart" ? "text-white font-semibold" : "text-gray-200"
               }`}
-              to="/cart"
+              to={user?.id ? "/cart" : "/login"}
             >
               <Badge
                 showZero
-                badgeContent={cart?.length || 0}
+                badgeContent={cartCount}
                 color="primary"
                 overlap="circular"
                 anchorOrigin={{ vertical: "top", horizontal: "right" }}
@@ -90,17 +107,14 @@ const Navbar = () => {
             </Link>
           </li>
 
-          {user && user.id ? (
+          {user?.id ? (
             <li className="font-[500] transition-all duration-150">
               <UserMenu />
             </li>
           ) : (
             <li className="font-[500] transition-all duration-150">
               <Link
-                className="flex items-center space-x-2 px-4 py-[5px]
-            bg-amber-200
-            text-white font-semibold rounded-md shadow-lg
-            hover:bg-amber-400"
+                className="flex items-center space-x-2 px-4 py-[5px] bg-amber-200 text-white font-semibold rounded-md shadow-lg hover:bg-amber-400"
                 to="/login"
               >
                 <FaSignInAlt />
@@ -109,6 +123,7 @@ const Navbar = () => {
             </li>
           )}
         </ul>
+
         <button
           onClick={() => setNavbarOpen(!navbarOpen)}
           className="sm:hidden flex items-center sm:mt-0 mt-2"
